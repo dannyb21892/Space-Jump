@@ -1,0 +1,16 @@
+#play-field {
+  background-color: #000;
+  height: 800px;
+  width: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
+
+#jumper {
+  background-color: white;
+  height: 20px;
+  position: absolute;
+  width: 20px;
+}

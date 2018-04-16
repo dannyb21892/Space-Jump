@@ -3,9 +3,31 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <script type="text/javascript" src="./index.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
+    <script src="./index.js"></script>
   </head>
   <body>
-    Test
+    <center>
+      <div id="play-field">
+        <form id="newGameForm" method="post" style="margin-top: 170px">
+          <label style="color: white">Username:</label><br>
+          <input id="usernameInput" type="text"><br>
+          <input type="submit" value="START">
+        </form>
+        <div id="jumper" style="bottom: 0px; left: 290px;"></div>
+      </div>
+
+      <div id="leaderboard">
+        <h2>LEADERBOARD:</h2>
+          <ul id="lb-ul" style="list-style-type: none">
+            <!-- leaderboard entries go here -->
+          </ul>
+      </div>
+    </center>
+
+    <script src="./adapter.js"></script>
+    <script src="./Jumper.js"></script>
+    <script src="./game.js"></script>
+    <script src="./Leaderboard.js"></script>
   </body>
 </html>
