@@ -1,21 +1,27 @@
 class Jumper {
   static jump() {
     let jumpVel = []
-    let frameCycle = 60
-    for (let i=0; i<60; i++) {
-      jumpVel[i] = Math.floor(15-(0.5*i))
+
+    //CHANGE ONLY THESE VALUES
+    let initialJumpSpeed = 15
+    let numberOfFramesPerJump = 60
+    let velocityDecreasePerFrame = 0.5 //it must be true that (numberOfFramesPerJump*velocityDecreasePerFrame)/(2*initialJumpSpeed) = 1
+
+    //DON'T CHANGE BELOW HERE
+    for (let i=0; i<numberOfFramesPerJump; i++) {
+      jumpVel[i] = Math.floor(initialJumpSpeed-(velocityDecreasePerFrame*i))
     }
-    console.log(jumpVel)
+
     let jumper = document.getElementById("jumper")
     let frame = 0
     let interval = setInterval(function(){
         jumper.style.bottom = `${Number(jumper.style.bottom.slice(0,-2)) + jumpVel[frame]}px`
 
         frame++
-        if (frame > 59) {
+        if (frame >= numberOfFramesPerJump) {
           clearInterval(interval)
           Jumper.jump()
         }
-      }, 1000/60)
+      }, 1000/numberOfFramesPerJump)
   }
 }
