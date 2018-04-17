@@ -121,11 +121,9 @@ class Jumper {
         output = true
       }
     })
-    if (jumperBottom <= 0) {
-     clearInterval(jumpInterval)
-     jumper.style.bottom = `0px`
-     // window.jumper.jump()
-     output = true
+    if (jumperBottom < -15) {
+     window.game.end()
+     return
    } else if (jumperBottom > 0 && !output){
      output = false
    }
