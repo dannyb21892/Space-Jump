@@ -14,3 +14,10 @@
   position: absolute;
   width: 20px;
 }
+
+.basicPlatform {
+  background-color: white;
+  height: 5px;
+  position: absolute;
+  width: 50px;
+}
