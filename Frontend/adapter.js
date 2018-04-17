@@ -1,8 +1,7 @@
 class Adapter {
   static getLeaderboardEntries(){
-    fetch("http://localhost:3000/api/v1/games")
+    return fetch("http://localhost:3000/api/v1/games")
     .then((response) => response.json())
-    .then(renderLeaderboard)
   }
 
   static sendGameResults(playername, score, duration){
@@ -14,8 +13,8 @@ class Adapter {
       body: JSON.stringify({
         player: {
           name: `${playername}`
-        }
-        score: `${score}`
+        },
+        score: `${score}`,
         duration: `${duration}`
       })
     })
