@@ -23,10 +23,7 @@ class Game {
     let playField = document.getElementById("play-field")
     playField.addEventListener("keypress", jumper.moveJumper)
     jumper.jump()
-
-    for (let i=0; i<20; i++){
-	     new BasicPlatform(Math.round(Math.random()*600), Math.round(Math.random()*800))
-     }
-    //jumper.collisionCheck()
+    initialSpawns()
   }
+    //initial platform spawn
 }
