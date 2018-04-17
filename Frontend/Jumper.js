@@ -39,21 +39,19 @@ class Jumper {
     }
 
     //this part does the actual movement
-     //else {
-      let frame = 0
-      let interval = setInterval(function() {
-        jumper.style.left = `${Number(jumper.style.left.slice(0,-2)) + (sign*lateralSpeed)}px`
-        frame++
+    let frame = 0
+    let interval = setInterval(function() {
+      jumper.style.left = `${Number(jumper.style.left.slice(0,-2)) + (sign*lateralSpeed)}px`
+      frame++
 
-        if (Number(jumper.style.left.slice(0,-2) < lateralSpeed) && sign === -1) {
-          jumper.style.left = "0px"
-        } else if (Number(jumper.style.left.slice(0,-2) > 580 - lateralSpeed) && sign === 1) {
-          jumper.style.left = "580px"
-        }
+      if (Number(jumper.style.left.slice(0,-2) < lateralSpeed) && sign === -1) {
+        jumper.style.left = "0px"
+      } else if (Number(jumper.style.left.slice(0,-2) > 580 - lateralSpeed) && sign === 1) {
+        jumper.style.left = "580px"
+      }
 
-        if (frame >= numberOfMovementFramesPerKeyPress) {clearInterval(interval)}
-      }, numberOfMovementFramesPerKeyPress*1000/60)
-  //  }
+      if (frame >= numberOfMovementFramesPerKeyPress) {clearInterval(interval)}
+    }, numberOfMovementFramesPerKeyPress*1000/60)
   }
 
 
