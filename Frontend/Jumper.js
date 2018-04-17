@@ -1,5 +1,8 @@
+let jumper = document.getElementById("jumper")
+
 class Jumper {
-  static jump() {
+  jump(){ //this function controls the constant jumping
+    let that = this
     let jumpVel = []
 
     //CHANGE ONLY THESE VALUES
@@ -12,7 +15,6 @@ class Jumper {
       jumpVel[i] = Math.floor(initialJumpSpeed-(velocityDecreasePerFrame*i))
     }
 
-    let jumper = document.getElementById("jumper")
     let frame = 0
     let interval = setInterval(function(){
         jumper.style.bottom = `${Number(jumper.style.bottom.slice(0,-2)) + jumpVel[frame]}px`
@@ -20,8 +22,39 @@ class Jumper {
         frame++
         if (frame >= numberOfFramesPerJump) {
           clearInterval(interval)
-          Jumper.jump()
+          that.jump()
         }
       }, 1000/numberOfFramesPerJump)
   }
+
+  moveJumper(e) {
+    let lateralSpeed = 2 //how fast you can move sideways
+    let numberOfMovementFramesPerKeyPress = 5 //kinda controls the "slideyness"
+
+    let sign = 0 //this part decides which direction to move
+    if (e.which === 97) {
+      sign = -1
+    } else if (e.which === 100) {
+      sign = 1
+    }
+
+    //this part does the actual movement
+     //else {
+      let frame = 0
+      let interval = setInterval(function() {
+        jumper.style.left = `${Number(jumper.style.left.slice(0,-2)) + (sign*lateralSpeed)}px`
+        frame++
+
+        if (Number(jumper.style.left.slice(0,-2) < lateralSpeed) && sign === -1) {
+          jumper.style.left = "0px"
+        } else if (Number(jumper.style.left.slice(0,-2) > 580 - lateralSpeed) && sign === 1) {
+          jumper.style.left = "580px"
+        }
+
+        if (frame >= numberOfMovementFramesPerKeyPress) {clearInterval(interval)}
+      }, numberOfMovementFramesPerKeyPress*1000/60)
+  //  }
+  }
+
+
 }

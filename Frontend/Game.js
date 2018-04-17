@@ -9,7 +9,6 @@ class Game {
     event.preventDefault()
     let usernameInput = document.getElementById("usernameInput")
     if (usernameInput.value != "") {
-      console.log("hello")
       window.username = usernameInput.value
       event.target.style = "visibility: hidden"
       Game.gameplay()
@@ -19,6 +18,9 @@ class Game {
   }
 
   static gameplay() {
-    Jumper.jump()
+    let jumper = new Jumper
+    let playField = document.getElementById("play-field")
+    playField.addEventListener("keypress", jumper.moveJumper)
+    jumper.jump()
   }
 }
