@@ -12,13 +12,10 @@ class Jumper {
     let initialJumpSpeed = 15
     let numberOfFramesPerJump = 60
     let velocityDecreasePerFrame = 0.5 //it must be true that (numberOfFramesPerJump*velocityDecreasePerFrame)/(2*initialJumpSpeed) = 1
-    // maxJumpHeight = 225
     //DON'T CHANGE BELOW HERE
     for (let i=0; i<numberOfFramesPerJump; i++) {
       jumpVel[i] = Math.floor(initialJumpSpeed-(velocityDecreasePerFrame*i))
-      // if (i<30) {jumpHeight = jumpHeight + jumpVel[i]}
     }
-    // console.log(jumpHeight)
     // let frame = 0
     // jumpInterval = setInterval(function(){
     //   if (frame >= numberOfFramesPerJump) {
@@ -35,6 +32,9 @@ class Jumper {
     function myLoop() {
       setTimeout(function () {
         jumper.style.bottom = `${Number(jumper.style.bottom.slice(0,-2)) + jumpVel[frame]}px`
+        if (Number(jumper.style.bottom.slice(0,-2)) >= 400) {
+          window.game.screenScroll(Number(jumper.style.bottom.slice(0,-2)) - 400)
+        }
         if((frame >= 30) && (frame < 60)){
           if (that.collisionCheck()) {
             that.jump()

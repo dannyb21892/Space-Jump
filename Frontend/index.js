@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
   Leaderboard.render()
-  Game.start()
+  window.game = new Game
+  game.start()
 })

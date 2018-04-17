@@ -21,3 +21,10 @@
   position: absolute;
   width: 50px;
 }
+
+#scoreDiv {
+  top: 10px;
+  left: 20px;
+  position: absolute;
+  color: white;
+}
