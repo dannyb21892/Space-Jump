@@ -59,6 +59,34 @@ th {
   position: absolute;
   width: 50px;
 }
+.fragilePlatform {
+  background-color: red;
+  border-color: white;
+  border-radius: 1px;
+  height: 5px;
+  position: absolute;
+  width: 50px;
+}
+.mobilePlatform {
+  background-color: purple;
+  height: 5px;
+  position: absolute;
+  width: 50px;
+}
+.mobileFragilePlatform {
+  background-color: red;
+  border-color: white;
+  border-radius: 1px;
+  height: 5px;
+  position: absolute;
+  width: 50px;
+}
+.smallPlatform {
+  background-color: white;
+  height: 5px;
+  position: absolute;
+  width: 20px;
+}
 
 .gameOver {
   color: white;
