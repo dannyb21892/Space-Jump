@@ -2,13 +2,19 @@ class Leaderboard {
   static render(){
     console.log("refreshing lb")
     let sorted = Leaderboard.sortEntries()
-    let leaderboard = document.getElementById('lb-ul')
-    leaderboard.innerText = ""
+    let leaderboard = document.getElementById('lb-table')//ul')
+    leaderboard.innerHTML = `<tr>
+                              <th>Rank</th>
+                              <th>Player</th>
+                              <th>Score</th>
+                            </tr>`
     let rank = 1
     sorted.then((games) => {games.forEach((game) => {
-        let li = document.createElement("li")
-        li.innerText = `Rank: ${rank++} | Player: ${game.player.username} | Score: ${game.score}`
-        leaderboard.append(li)
+        let tr = document.createElement("tr")
+        tr.innerHTML = `<td>${rank++}</td>
+                        <td>${game.player.username}</td>
+                        <td>${game.score}</td>`
+        leaderboard.append(tr)
       })
     })
     console.log("should be done?")
