@@ -30,7 +30,7 @@
   height: 5px;
   position: absolute;
   width: 50px;
-  box-shadow: 10px 10px pink;
+  box-shadow: 0px 0px 10px 5px pink;
 }
 
 .gameOver {
@@ -44,7 +44,7 @@
    height: 90%; /* Full-height: remove this if you want "auto" height */
      width: 90px; /* Set the width of the sidebar */
      position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-     z-index: 1; /* Stay on top */
+     z-index: 0; /* Stay on top */
      top: 10; /* Stay at the top */
      left: 0;
      overflow-x: hidden; /* Disable horizontal scroll */
