@@ -1,5 +1,6 @@
 #play-field {
   background-color: #000;
+  z-index: 1;
   /* background: linear-gradient(pink, purple); */
   background-image: url(https://images.pexels.com/photos/753267/pexels-photo-753267.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
   height: 800px;
@@ -25,6 +26,32 @@
   font-family: Comic Sans MS;
 }
 
+#leaderboard {
+  z-index: 0;
+  width: 400px;
+  height: 800px;
+  top: 0%;
+  right: 1%;
+  position: absolute;
+  overflow-y: scroll;
+}
+
+/* table stuff */
+table {
+  width: 50%;
+}
+tr:nth-child(even) {background-color: #f2f2f2;}
+tr {
+  text-align: center;
+  width: 200px
+}
+th {
+    background-color: black;
+    color: white;
+    width: 200px
+}
+/* end table stuff */
+
 .basicPlatform {
   background-color: white;
   height: 5px;
@@ -42,15 +69,14 @@
 
 .w3-sidebar-w3-bar-block{
    height: 90%; /* Full-height: remove this if you want "auto" height */
-     width: 90px; /* Set the width of the sidebar */
-     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-     z-index: 0; /* Stay on top */
-     top: 10; /* Stay at the top */
-     left: 0;
-     overflow-x: hidden; /* Disable horizontal scroll */
-     padding-top: 10px;
-
- }
+   width: 90px; /* Set the width of the sidebar */
+   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+   z-index: 0; /* Stay on top */
+   top: 0%; /* Stay at the top */
+   left: 10;
+   overflow-x: hidden; /* Disable horizontal scroll */
+   /* padding-top: 10px; */
+}
 
 input[type=text] {
     border: 2px solid pink;

@@ -106,9 +106,9 @@ class Jumper {
     let output = false
     // collisionCheckInterval = setInterval(function(){
     activePlatforms.forEach(platform => { //platform in this case is an array [platformDiv, platformInstance]
-      let platformLeft = platform[1].left
-      let platformBottom = platform[1].bottom
       let platformStyle = window.getComputedStyle(platform[0])
+      let platformLeft = Number(platformStyle.getPropertyValue('left').slice(0,-2))
+      let platformBottom = platform[1].bottom
       let platformWidth = Number(platformStyle.getPropertyValue('width').slice(0,-2))
       let platformHeight = Number(platformStyle.getPropertyValue('height').slice(0,-2))
 
@@ -118,6 +118,15 @@ class Jumper {
         //clearInterval(jumpInterval)
         jumper.style.bottom = `${platformBottom + platformHeight}px`
         //window.jumper.jump()
+        if (platform[0].className === "fragilePlatform") {
+          let i = activePlatforms.findIndex(element => element === platform)
+          activePlatforms = [...activePlatforms.slice(0,i), 0, ...activePlatforms.slice(i+1)]
+          platform[0].remove()
+        } else if (platform[0].className === "mobileFragilePlatform"){
+          let i = activePlatforms.findIndex(element => element === platform)
+          activePlatforms = [...activePlatforms.slice(0,i), 0, ...activePlatforms.slice(i+1)]
+          platform[0].remove()
+        }
         output = true
       }
     })
@@ -127,6 +136,7 @@ class Jumper {
    } else if (jumperBottom > 0 && !output){
      output = false
    }
+   activePlatforms = activePlatforms.filter(element => element != 0)
    return output
   // }, 1000/60)
   }

@@ -1,5 +1,6 @@
 #play-field {
   background-color: blue;
+  z-index: 1;
   height: 800px;
   width: 600px;
   background-image: url(https://images.unsplash.com/photo-1516571748831-5d81767b788d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5a29d44f8c78ba3da0e00af9c60de1a3&auto=format&fit=crop&w=634&q=80);
@@ -23,11 +24,38 @@
   color: white;
 }
 
+#leaderboard {
+  z-index: 0;
+  width: 400px;
+  height: 800px;
+  top: 0%;
+  right: 1%;
+  position: absolute;
+  overflow-y: scroll;
+}
+
+/* table stuff */
+table {
+  width: 50%;
+}
+tr:nth-child(even) {background-color: #f2f2f2;}
+tr {
+  text-align: center;
+  width: 200px
+}
+th {
+    background-color: black;
+    color: white;
+    width: 200px
+}
+/* end table stuff */
+
 .basicPlatform {
-  background-color: white;
+  background-color: black;
   height: 5px;
   position: absolute;
   width: 50px;
+  box-shadow: 0px 0px 10px 3px white;
 }
 
 .gameOver {
@@ -37,12 +65,12 @@
 }
 
 .w3-sidebar-w3-bar-block{
-  height: 90%; /* Full-height: remove this if you want "auto" height */
-    width: 160px; /* Set the width of the sidebar */
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 0; /* Stay on top */
-    top: 10; /* Stay at the top */
-    left: 0;
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 10px;
-}
+   height: 90%; /* Full-height: remove this if you want "auto" height */
+   width: 90px; /* Set the width of the sidebar */
+   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+   z-index: 0; /* Stay on top */
+   top: 0%; /* Stay at the top */
+   left: 10;
+   overflow-x: hidden; /* Disable horizontal scroll */
+   /* padding-top: 10px; */
+ }

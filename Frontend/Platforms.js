@@ -37,15 +37,52 @@ function generateSpawnPoint(){
   return [bottom, left]
 }
 
+function decideWhichPlatform(){
+  let progress = window.game.score / 100000
+  if (progress > 1) {progress = 1}
+  let freqArray = [
+    {klass: BasicPlatform, frequency: 1 - progress},
+    {klass: MobileFragilePlatform, frequency: 0.1*progress},
+    {klass: SmallPlatform, frequency: 0.2*progress},
+    {klass: FragilePlatform, frequency: 0.3*progress},
+    {klass: MobilePlatform, frequency: 0.4*progress}
+  ].sort((a,b) => {
+    if (a.frequency < b.frequency) {
+      return 1
+    } else if (a.frequency > b.frequency) {
+      return -1
+    } else {
+      return 0
+    }
+  }) //sort the array of platforms in decreasing order of frequency given current score
+  let whichPlatform = ""
+  let random = Math.random()*Math.max(1 - progress, 0.4*progress)
+
+  freqArray.forEach(element => {
+    if (random < element.frequency) {
+      whichPlatform = element.klass
+    }
+  })
+  console.log(whichPlatform)
+  return whichPlatform
+  // if (Math.random() < basicFrequency) {
+  //   return BasicPlatform
+  // } else {
+  //   return FragilePlatform
+  // }
+}
+
 function maybeSpawnNewPlatform(){
   let last = activePlatforms[activePlatforms.length - 1][1]
 
   if (last.bottom <= 600) {
     let coords = generateSpawnPoint()
-    new BasicPlatform(coords[1], 800)
+    let whichPlatform = decideWhichPlatform()
+    new whichPlatform(coords[1], 800)
   } else if (Math.random() > window.spawnFrequency) {
     let coords = generateSpawnPoint()
-    new BasicPlatform(coords[1], 800)
+    let whichPlatform = decideWhichPlatform()
+    new whichPlatform(coords[1], 800)
   }
 }
 
@@ -66,5 +103,121 @@ class BasicPlatform {
 
     playField.append(platform)
     activePlatforms.push([platform, this])
+  }
+}
+
+class FragilePlatform {
+  constructor(left, bottom){
+    //class instance
+    this.bottom = bottom
+    this.left = left
+
+    //html stuff
+    let playField = document.getElementById("play-field")
+
+    let platform = document.createElement("div")
+
+    platform.className = "fragilePlatform"
+    platform.style.left = `${left}px`
+    platform.style.bottom = `${bottom}px`
+
+    playField.append(platform)
+    activePlatforms.push([platform, this])
+  }
+}
+
+class MobilePlatform {
+  constructor(left, bottom){
+    //class instance
+    this.bottom = bottom
+    this.left = left
+    this.movementSpeed = Math.floor(Math.random()*10 + 1)
+    if (Math.random() < 0.5) {
+      this.direction = -1
+    } else {
+      this.direction = 1
+    }
+    let that = this
+    //html stuff
+    let playField = document.getElementById("play-field")
+
+    let platform = document.createElement("div")
+
+    platform.className = "mobilePlatform"
+    platform.style.left = `${left}px`
+    platform.style.bottom = `${bottom}px`
+
+    playField.append(platform)
+    activePlatforms.push([platform, this])
+
+    let movement = setInterval(() => {
+      let platformStyle = window.getComputedStyle(platform)
+
+      platform.style.left = `${Math.floor(Number(platformStyle.left.slice(0,-2))) + (that.direction*that.movementSpeed)}px`
+      if (Number(platform.style.left.slice(0,-2)) < 0 || Number(platform.style.left.slice(0,-2)) > 550) {
+        that.direction = that.direction * (-1)
+      }
+      if (Number(platformStyle.bottom.slice(0,-2)) < - 10) {
+        clearInterval(movement)
+      }
+    }, 1000/60)
+  }
+}
+
+class SmallPlatform {
+  constructor(left, bottom){
+    //class instance
+    this.bottom = bottom
+    this.left = left
+
+    //html stuff
+    let playField = document.getElementById("play-field")
+
+    let platform = document.createElement("div")
+
+    platform.className = "smallPlatform"
+    platform.style.left = `${left}px`
+    platform.style.bottom = `${bottom}px`
+
+    playField.append(platform)
+    activePlatforms.push([platform, this])
+  }
+}
+
+class MobileFragilePlatform {
+  constructor(left, bottom){
+    //class instance
+    this.bottom = bottom
+    this.left = left
+    this.movementSpeed = Math.floor(Math.random()*10 + 1)
+    if (Math.random() < 0.5) {
+      this.direction = -1
+    } else {
+      this.direction = 1
+    }
+    let that = this
+    //html stuff
+    let playField = document.getElementById("play-field")
+
+    let platform = document.createElement("div")
+
+    platform.className = "mobileFragilePlatform"
+    platform.style.left = `${left}px`
+    platform.style.bottom = `${bottom}px`
+
+    playField.append(platform)
+    activePlatforms.push([platform, this])
+
+    let movement = setInterval(() => {
+      let platformStyle = window.getComputedStyle(platform)
+
+      platform.style.left = `${Math.floor(Number(platformStyle.left.slice(0,-2))) + (that.direction*that.movementSpeed)}px`
+      if (Number(platform.style.left.slice(0,-2)) < 0 || Number(platform.style.left.slice(0,-2)) > 550) {
+        that.direction = that.direction * (-1)
+      }
+      if (Number(platformStyle.bottom.slice(0,-2)) < - 10) {
+        clearInterval(movement)
+      }
+    }, 1000/60)
   }
 }
