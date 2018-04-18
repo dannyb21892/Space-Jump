@@ -31,9 +31,9 @@ class Jumper {
 
     function myLoop() {
       setTimeout(function () {
-        jumper.style.bottom = `${Number(jumper.style.bottom.slice(0,-2)) + jumpVel[frame]}px`
-        if (Number(jumper.style.bottom.slice(0,-2)) >= 400) {
-          window.game.screenScroll(Number(jumper.style.bottom.slice(0,-2)) - 400)
+        jumper.style.bottom = `${Math.floor(Number(jumper.style.bottom.slice(0,-2))) + jumpVel[frame]}px`
+        if (Math.floor(Number(jumper.style.bottom.slice(0,-2))) > 400) {
+          window.game.screenScroll(Math.floor(Number(jumper.style.bottom.slice(0,-2))) - 400)
         }
         if((frame >= 30) && (frame < 60)){
           if (that.collisionCheck()) {
