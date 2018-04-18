@@ -1,0 +1,47 @@
+#play-field {
+  background-color: black;
+  height: 800px;
+  width: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
+
+#jumper {
+  background-color: white;
+  height: 20px;
+  position: absolute;
+  width: 20px;
+}
+
+.basicPlatform {
+  background-color: white;
+  height: 5px;
+  position: absolute;
+  width: 50px;
+}
+
+.w3-sidebar-w3-bar-block{
+  height: 90%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 10; /* Stay at the top */
+    left: 0;
+    background-color: grey; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 10px;
+}
+
+.w3-sidebar-w3-bar-block a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+}
+
+.leaderboard{
+
+}
