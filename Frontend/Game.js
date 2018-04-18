@@ -4,6 +4,7 @@ class Game {
   }
 
   start() {
+    Leaderboard.render()
     let newGameForm = document.getElementById("newGameForm")
     newGameForm.style.visibility = ""
     newGameForm.addEventListener("submit", window.game.beginGame)
@@ -76,38 +77,41 @@ class Game {
 
   end(){
     let jumper = document.getElementById("jumper")
+    if (jumper) {
+      jumper.remove()
 
-    let tempActivePlatforms
-    let copyActivePlatforms = [...activePlatforms] //interval callback below loses scope of global activePlatforms. This is a weird ass workaround.
+      let tempActivePlatforms
+      let copyActivePlatforms = [...activePlatforms] //interval callback below loses scope of global activePlatforms. This is a weird ass workaround.
 
-    if (document.getElementsByClassName("gameOver").length === 0){
-      let gameOverDiv = document.createElement("div")
-      gameOverDiv.innerHTML = `<h1>GAME<br>OVER</h1>
-      <br><br><h2>FINAL SCORE:<br>${window.game.score}</h2>`
-      gameOverDiv.style.top = "1200px"
+      if (document.getElementsByClassName("gameOver").length === 0){
+        let gameOverDiv = document.createElement("div")
+        gameOverDiv.innerHTML = `<h1>GAME<br>OVER</h1>
+        <br><br><h2>FINAL SCORE:<br>${window.game.score}</h2>`
+        gameOverDiv.style.top = "1200px"
 
-      gameOverDiv.className = "gameOver"
+        gameOverDiv.className = "gameOver"
 
-      let playField = document.getElementById("play-field")
-      playField.append(gameOverDiv)
+        let playField = document.getElementById("play-field")
+        playField.append(gameOverDiv)
 
-      let interval = setInterval(function(){
-        jumper.style.bottom = `${Number(jumper.style.bottom.slice(0,-2)) + 5}px`
-        gameOverDiv.style.top = `${Number(gameOverDiv.style.top.slice(0,-2)) - 5}px`
-        tempActivePlatforms = [...copyActivePlatforms]
-        copyActivePlatforms.forEach(platform => {
-          platform[0].style.bottom = `${platform[1].bottom + 5}px`
-          platform[1].bottom = platform[1].bottom + 5
-          if (platform[1].bottom > 800) {
-            platform[0].remove()
-            tempActivePlatforms = [...tempActivePlatforms.slice(1)]
+        let interval = setInterval(function(){
+          // jumper.style.bottom = `${Number(jumper.style.bottom.slice(0,-2)) + 5}px`
+          gameOverDiv.style.top = `${Number(gameOverDiv.style.top.slice(0,-2)) - 5}px`
+          tempActivePlatforms = [...copyActivePlatforms]
+          copyActivePlatforms.forEach(platform => {
+            platform[0].style.bottom = `${platform[1].bottom + 5}px`
+            platform[1].bottom = platform[1].bottom + 5
+            if (platform[1].bottom > 800) {
+              platform[0].remove()
+              tempActivePlatforms = [...tempActivePlatforms.slice(1)]
+            }
+          })
+          if(Number(gameOverDiv.style.top.slice(0,-2)) < 200){
+            clearInterval(interval)
           }
-        })
-        if(Number(gameOverDiv.style.top.slice(0,-2)) < 200){
-          jumper.remove()
-          clearInterval(interval)
-        }
-      },1000/60)
+        },1000/60)
+      }
+      Adapter.sendGameResults(window.username, window.game.score, 10).then(Leaderboard.render)
     }
   }
 }

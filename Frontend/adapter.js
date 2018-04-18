@@ -4,18 +4,20 @@ class Adapter {
     .then((response) => response.json())
   }
 
-  static sendGameResults(playername, score, duration){
-    fetch("http://localhost:3000/api/v1/games",{
+  static sendGameResults(username, score, duration){
+    return fetch("http://localhost:3000/api/v1/games",{
       method: "POST",
       headers: {
         'Content-type':'application/json'
       },
       body: JSON.stringify({
-        player: {
-          name: `${playername}`
-        },
-        score: `${score}`,
-        duration: `${duration}`
+        game: {
+          player: {
+            username: `${username}`
+          },
+          score: `${score}`,
+          duration: `${duration}`
+        }
       })
     })
   }

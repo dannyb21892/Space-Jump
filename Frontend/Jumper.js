@@ -123,7 +123,7 @@ class Jumper {
     })
     if (jumperBottom < -15) {
      window.game.end()
-     return
+     output = false
    } else if (jumperBottom > 0 && !output){
      output = false
    }

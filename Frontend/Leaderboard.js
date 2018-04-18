@@ -1,7 +1,9 @@
 class Leaderboard {
   static render(){
-    let sorted = this.sortEntries()
+    console.log("refreshing lb")
+    let sorted = Leaderboard.sortEntries()
     let leaderboard = document.getElementById('lb-ul')
+    leaderboard.innerText = ""
     let rank = 1
     sorted.then((games) => {games.forEach((game) => {
         let li = document.createElement("li")
@@ -9,10 +11,11 @@ class Leaderboard {
         leaderboard.append(li)
       })
     })
-
+    console.log("should be done?")
   }
 
   static sortEntries() {
+    console.log("fetching rankings")
     let entries = Adapter.getLeaderboardEntries()
     return entries.then(json => {
       return json.sort((a,b) => {
