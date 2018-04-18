@@ -3,11 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
+    <script src="./skinSelector.js"></script>
+    <link id="stylesheet" rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
     <script src-"./wait.js"></script>
     <script src="./index.js"></script>
   </head>
   <body>
+
+    <div class="w3-sidebar-w3-bar-block" style="width:24%">
+      <h1>THEMES!</h1>
+      <a onclick="setStyleSheet('stylesheets/stylesheet.css')" href="#" class="w3-bar-item w3-button"><img src="https://images.pexels.com/photos/362993/pexels-photo-362993.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"style="width:80px;height:80px;border:0;"></a>
+      <a onclick="setStyleSheet('stylesheets/stylesheet2.css')" href="#" class="w3-bar-item w3-button"><img src="https://images.pexels.com/photos/159020/sunset-sky-afterglow-evening-sky-159020.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" style="width:80px;height:80px;border:0;"></a>
+      <a onclick="setStyleSheet('stylesheets/stylesheet3.css')" href="#" class="w3-bar-item w3-button"> <img src="https://images.unsplash.com/photo-1516571748831-5d81767b788d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5a29d44f8c78ba3da0e00af9c60de1a3&auto=format&fit=crop&w=634&q=80" style="width:80px;height:80px;border:0;"></a>
+      <a onclick="setStyleSheet('stylesheets/stylesheet4.css')" href="#" class="w3-bar-item w3-button"> <img src="https://images.pexels.com/photos/137616/pexels-photo-137616.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" style="width:80px;height:80px;border:0;"></a>
+    </div>
+
     <center>
       <div id="play-field" tabindex="1">
         <div id="scoreDiv">
@@ -15,7 +25,7 @@
           <p id = "score">0</p>
         </div>
         <form id="newGameForm" method="post" style="margin-top: 170px">
-          <label style="color: white">Username:</label><br>
+          <label id="usernameInputLabel" style="color: white">Username:</label><br>
           <input id="usernameInput" type="text"><br>
           <input type="submit" value="START">
         </form>
