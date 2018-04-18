@@ -15,6 +15,13 @@
   width: 20px;
 }
 
+#scoreDiv {
+  top: 10px;
+  left: 20px;
+  position: absolute;
+  color: white;
+}
+
 .basicPlatform {
   background-color: white;
   height: 5px;
@@ -22,9 +29,8 @@
   width: 50px;
 }
 
-#scoreDiv {
-  top: 10px;
-  left: 20px;
-  position: absolute;
+.gameOver {
   color: white;
+  position: absolute;
+  left: 220px;
 }
