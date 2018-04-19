@@ -3,6 +3,7 @@ gameOver = false
 class Game {
   constructor() {
     this.score = 0
+    this.wands = 0
   }
 
   start() {
@@ -43,6 +44,7 @@ class Game {
     let jumper = new Jumper
     window.jumperObject = jumper
     document.addEventListener("keypress", jumper.moveJumper)
+    document.addEventListener("keypress", MagicWand.useWand)
     initialSpawns()
     document.getElementById("jumper").style.left = "290px"
     jumper.jump()
@@ -91,6 +93,7 @@ class Game {
     let jumper = document.getElementById("jumper")
     if (jumper) {
       document.removeEventListener("keypress", jumperObject.moveJumper)
+      document.removeEventListener("keypress", MagicWand.useWand)
       jumper.style.bottom = "0px"
       jumper.remove()
 
@@ -161,6 +164,9 @@ class Game {
         <h3 id="scoreTitle">SCORE:</h3>
         <p id = "score">0</p>
       </div>
+      <div id="wandDiv">
+        <div id="wandPic"><h3 id="wandCount">x 0</h3></div>
+      </div>
       <form id="newGameForm" method="post" style="visibility: hidden">
         <label id="usernameInputLabel" style="color: white">Username:</label><br>
         <input id="usernameInput" type="text"><br>
@@ -182,6 +188,9 @@ class Game {
       <div id="scoreDiv">
         <h3 id="scoreTitle">SCORE:</h3>
         <p id = "score">0</p>
+      </div>
+      <div id="wandDiv">
+        <div id="wandPic"><h3 id="wandCount">x 0</h3></div>
       </div>
       <form id="newGameForm" method="post" style="margin-top: 170px">
         <label id="usernameInputLabel" style="color: white">Username:</label><br>

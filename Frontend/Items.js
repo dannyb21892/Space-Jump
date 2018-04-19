@@ -30,9 +30,51 @@ class Bouncer {
   }
 }
 
+class MagicWand {
+  constructor(left, parentPlatform) {
+    let wand = document.createElement("div")
+    wand.className = "wand"
+    wand.style.left = `${left}px`
+    wand.style.bottom = `800px`
+    activeItems.push(wand)
+    if (parentPlatform.constructor.name === "MobilePlatform" || parentPlatform.constructor.name === "MobileFragilePlatform") {
+      wand.dataset.movementSpeed = parentPlatform.movementSpeed
+      wand.dataset.direction = parentPlatform.direction
+      let movement = setInterval(() => {
+        let wandStyle = window.getComputedStyle(wand)
+
+        wand.style.left = `${Math.floor(Number(wandStyle.left.slice(0,-2))) + (wand.dataset.direction*wand.dataset.movementSpeed)}px`
+        if (Number(wand.style.left.slice(0,-2)) < 10) {
+          wand.style.left = "9px"
+          wand.dataset.direction = wand.dataset.direction * (-1)
+        } else if (Number(wand.style.left.slice(0,-2)) > 558) {
+          wand.style.left = "559px"
+          wand.dataset.direction = wand.dataset.direction * (-1)
+        }
+        if (Number(wandStyle.bottom.slice(0,-2)) < - 10) {
+          clearInterval(movement)
+        }
+      }, 1000/60)
+    }
+    document.getElementById("play-field").append(wand)
+  }
+
+  static useWand(event) {
+    if(event.which === 32 && game.wands > 0) {
+      console.log("use wand")
+      let jumper = document.getElementById("jumper")
+      let wandCount = document.getElementById("wandCount")
+      new BasicPlatform(Number(jumper.style.left.slice(0,-2))-15, Number(jumper.style.bottom.slice(0,-2))-15)
+      game.wands--
+      wandCount.innerText = `x ${Number(wandCount.innerText.slice(2))-1}`
+    }
+  }
+}
+
 function maybeSpawnNewItem(left, parentPlatform) {
   let freqArray = [//be sure to add new items to here and give them a frequency
-    {klass: Bouncer, frequency: 0.99} //manually sort items in increasing frequency
+    {klass: MagicWand, frequency: 0.01}, //manually sort items in increasing frequency
+    {klass: Bouncer, frequency: 0.05}
   ]//each frequency represents the probability the item will spawn on every new platform
 
   let random = Math.random()

@@ -27,10 +27,10 @@ class Leaderboard {
                             <td>${game.player.username}</td>
                             <td>${game.score}</td>`
             leaderboard.append(tr)
-            document.addEventListener("click", Leaderboard.renderUser)
           }
         }
       })
+      document.addEventListener("click", Leaderboard.renderUser)
     })
   }
 

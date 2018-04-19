@@ -6,8 +6,8 @@ function initialSpawns() {
     let left
     let bottom
     if (i === 0) {
-      left = Math.round(Math.random()*530 + 20)
-      bottom = Math.round(Math.random()*225)
+      left = Math.round(Math.random()*510 + 20)
+      bottom = Math.round(Math.random()*200)
     } else {
       let coords = generateSpawnPoint()
       bottom = coords[0]
