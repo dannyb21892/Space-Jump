@@ -7,6 +7,8 @@ class Game {
 
   start() {
     gameOver = false
+    $("#newGameForm").fadeOut(0)
+    $("#newGameForm").fadeIn(1000)
     Leaderboard.render()
     let newGameForm = document.getElementById("newGameForm")
     newGameForm.style.visibility = ""

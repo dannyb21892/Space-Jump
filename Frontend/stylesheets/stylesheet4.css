@@ -50,6 +50,11 @@
   font-family: Comic Sans MS;
 }
 
+#letsgo:hover {
+  text-shadow: 0 0 10px #6da5ff;
+  cursor: pointer;
+}
+
 #gameOver {
   color: white;
   position: absolute;
