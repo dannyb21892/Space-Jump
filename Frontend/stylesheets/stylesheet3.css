@@ -34,6 +34,15 @@
   overflow-y: scroll;
 }
 
+#lb-reset {
+  text-decoration: underline;
+  color: blue;
+}
+
+#lb-reset:hover {
+  cursor: pointer;
+}
+
 #tutorial {
   z-index: 3;
   height: 800px;
@@ -121,6 +130,14 @@ th {
   position: absolute;
   width: 20px;
   left: 290px;
+}
+
+.bouncer {
+  transform: rotate(15deg);
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background-image: url("../images/if_bounce_45306.png")
 }
 
 .w3-sidebar-w3-bar-block{

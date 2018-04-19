@@ -52,40 +52,47 @@ function decideWhichPlatform(){
     {klass: MobilePlatform, frequency: 0.4*progress}
   ].sort((a,b) => {
     if (a.frequency < b.frequency) {
-      return 1
-    } else if (a.frequency > b.frequency) {
       return -1
+    } else if (a.frequency > b.frequency) {
+      return 1
     } else {
       return 0
     }
-  }) //sort the array of platforms in decreasing order of frequency given current score
+  }) //sort the array of platforms in increasing order of frequency given current score
   let whichPlatform = ""
-  let random = Math.random()*Math.max(1 - progress, 0.4*progress)
+  let random = Math.random()
+  let cumulativeFreq = 0
 
-  freqArray.forEach(element => {
-    if (random < element.frequency) {
-      whichPlatform = element.klass
+  for(let i=0; i<freqArray.length; i++){
+    cumulativeFreq += freqArray[i].frequency
+    if (random < cumulativeFreq) {
+      whichPlatform = freqArray[i].klass
+      break
     }
-  })
+  }
   return whichPlatform
-  // if (Math.random() < basicFrequency) {
-  //   return BasicPlatform
-  // } else {
-  //   return FragilePlatform
-  // }
 }
 
 function maybeSpawnNewPlatform(){
   let last = activePlatforms[activePlatforms.length - 1][1]
-
+  let whichPlatform = null
+  let coords = null
   if (last.bottom <= 600) {
-    let coords = generateSpawnPoint()
-    let whichPlatform = decideWhichPlatform()
+    coords = generateSpawnPoint()
+    whichPlatform = decideWhichPlatform()
     new whichPlatform(coords[1], 800)
   } else if (Math.random() > window.spawnFrequency) {
-    let coords = generateSpawnPoint()
-    let whichPlatform = decideWhichPlatform()
+    coords = generateSpawnPoint()
+    whichPlatform = decideWhichPlatform()
     new whichPlatform(coords[1], 800)
+  }
+
+  if(!whichPlatform){
+    //do not spawn an item
+  } else if (whichPlatform === SmallPlatform) {
+    maybeSpawnNewItem(coords[1]-6) // center 32px item on 20px platform
+  } else {
+    maybeSpawnNewItem(coords[1]+9) // center 32px item on 50px platform
   }
 }
 

@@ -45,7 +45,6 @@ class Game {
   }
 
   screenScroll(pixels) {
-    // console.log(`Scrolling ${pixels} pixels`)
     window.game.score = window.game.score + Math.ceil(pixels)
     window.spawnFrequency = window.game.score*(0.1/100000) + 0.9
     //window.game.score*(a/c) + b. a+b must = 1.
@@ -59,9 +58,6 @@ class Game {
     let jumper = document.getElementById("jumper")
     jumper.style.bottom = `${Number(jumper.style.bottom.slice(0,-2)) - pixels}px`
 
-    // let tempActivePlatforms = [...activePlatforms]
-    // let copyActivePlatforms = [...activePlatforms]
-    // let deleteIndeces = []
     for (let i = 0; i < activePlatforms.length; i++) {
       activePlatforms[i][0].style.bottom = `${activePlatforms[i][1].bottom - pixels}px`
       activePlatforms[i][1].bottom = activePlatforms[i][1].bottom - pixels
@@ -71,18 +67,16 @@ class Game {
       }
     }
     activePlatforms = activePlatforms.filter(element=>element != 0)
-    // copyActivePlatforms.forEach(platform => {
-    //   // console.log(`BEFORE SCROLL: ${platform[0]}, ${platform[1]}`)
-      // platform[0].style.bottom = `${platform[1].bottom - pixels}px`
-      // platform[1].bottom = platform[1].bottom - pixels
-      // // console.log(`AFTER SCROLL: ${platform[0]}, ${platform[1]}`)
-      // if (platform[1].bottom < -10) {
-      //   activePlatforms[0][0].remove()
-      //   activePlatforms.splice(0,1)
-      // }
-    // })
 
-    // activePlatforms = tempActivePlatforms
+    for (let i = 0; i < activeItems.length; i++) {
+      let itemStyle = window.getComputedStyle(activeItems[i])
+      activeItems[i].style.bottom = `${Number(itemStyle.getPropertyValue("bottom").slice(0,-2)) - pixels}px`
+      if (Number(activeItems[i].style.bottom.slice(0,-2)) < -10) {
+        activeItems[i].remove()
+        activeItems = [...activeItems.slice(0,i), 0, ...activeItems.slice(i+1)]
+      }
+    }
+    activeItems = activeItems.filter(element=>element != 0)
 
     maybeSpawnNewPlatform()
     return
@@ -99,6 +93,9 @@ class Game {
       let tempActivePlatforms
       let copyActivePlatforms = [...activePlatforms] //interval callback below loses scope of global activePlatforms. This is a weird ass workaround.
 
+      let tempActiveItems
+      let copyActiveItems = [...activeItems]
+
       if (document.getElementsByClassName("gameOver").length === 0){
         let gameOverDiv = document.createElement("div")
         gameOverDiv.innerHTML = `<h1>GAME<br>OVER</h1>
@@ -114,8 +111,8 @@ class Game {
         playField.append(gameOverDiv)
 
         let interval = setInterval(function(){
-          // jumper.style.bottom = `${Number(jumper.style.bottom.slice(0,-2)) + 15}px`
           gameOverDiv.style.top = `${Number(gameOverDiv.style.top.slice(0,-2)) - 5}px`
+
           tempActivePlatforms = [...copyActivePlatforms]
           copyActivePlatforms.forEach(platform => {
             platform[0].style.bottom = `${platform[1].bottom + 5}px`
@@ -125,6 +122,16 @@ class Game {
               tempActivePlatforms = [...tempActivePlatforms.slice(1)]
             }
           })
+
+          tempActiveItems = [...copyActiveItems]
+          copyActiveItems.forEach(item => {
+            item.style.bottom = `${Number(item.style.bottom.slice(0,-2)) + 5}px`
+            if (Number(item.style.bottom.slice(0,-2)) > 800) {
+              item.remove()
+              tempActiveItems = [...tempActiveItems.slice(1)]
+            }
+          })
+
           if(Number(gameOverDiv.style.top.slice(0,-2)) < 200){
             clearInterval(interval)
           }
@@ -139,6 +146,8 @@ class Game {
   }
 
   restart() {
+    let retry = document.getElementById("retry")
+    retry.removeEventListener("click", game.restart)
     let playField = document.getElementById("play-field")
     window.game = new Game
     $("#gameOver").fadeOut(1000)
@@ -159,6 +168,8 @@ class Game {
   }
 
   restartNew() {
+    let retryNew = document.getElementById("retryNew")
+    retryNew.removeEventListener("click", game.restartNew)
     let playField = document.getElementById("play-field")
     window.game = new Game
     $("#gameOver").fadeOut(1000)
