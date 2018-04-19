@@ -10,6 +10,27 @@
   text-align: center;
 }
 
+#wandDiv {
+  height: 64px;
+  width: 120px;
+  right: 0px;
+  top: 20px;
+  position: absolute;
+  color: white;
+}
+
+#wandPic {
+  height: 64px;
+  width: 64px;
+  background-image: url("../images/magic-wand 64.png")
+}
+
+#wandCount {
+  position: absolute;
+  left: 80px;
+  top: 5px;
+}
+
 #jumper {
   background-color: white;
   height: 20px;
@@ -39,6 +60,14 @@
   color: blue;
 }
 #lb-reset:hover {
+  cursor: pointer;
+}
+
+#lb-player {
+  text-decoration: underline;
+  color: blue;
+}
+#lb-player:hover {
   cursor: pointer;
 }
 
@@ -148,7 +177,15 @@ th {
   position: absolute;
   width: 32px;
   height: 32px;
-  background-image: url("../images/if_bounce_45306.png")
+  background-image: url("../images/if_bounce_45306.png");
+  left: 284px;
+}
+.wand {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background-image: url("../images/magic-wand.png");
+  left: 284px;
 }
 
 .w3-sidebar-w3-bar-block{

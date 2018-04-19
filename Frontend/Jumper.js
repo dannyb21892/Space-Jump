@@ -143,13 +143,24 @@ class Jumper {
       let verticalCollision = (jumperBottom >= (itemBottom-10)) && (jumperBottom <= (itemBottom + itemHeight))
 
       if (horizontalCollision && verticalCollision) {
-        jumper.style.bottom = `${itemBottom + itemHeight}px`
         if (item.className === "bouncer") {
+          jumper.style.bottom = `${itemBottom + itemHeight}px`
           jumperObject.multiplier = 2
           output = true
         }
+        if (item.className === "wand") {
+          let wandCount = document.getElementById("wandCount")
+          console.log(wandCount)
+          game.wands++
+          wandCount.innerText = `x ${Number(wandCount.innerText.slice(2))+1}`
+          let i = activeItems.findIndex(element => element === item)
+          activeItems = [...activeItems.slice(0,i), 0, ...activeItems.slice(i+1)]
+          item.remove()
+          output = false
+        }
       }
     })
+    activeItems = activeItems.filter(element => element != 0)
 
     if (jumperBottom < -15) {
      window.game.end()
