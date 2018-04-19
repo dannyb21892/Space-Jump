@@ -77,22 +77,23 @@ function maybeSpawnNewPlatform(){
   let last = activePlatforms[activePlatforms.length - 1][1]
   let whichPlatform = null
   let coords = null
+  let output
   if (last.bottom <= 600) {
     coords = generateSpawnPoint()
     whichPlatform = decideWhichPlatform()
-    new whichPlatform(coords[1], 800)
+    output = new whichPlatform(coords[1], 800)
   } else if (Math.random() > window.spawnFrequency) {
     coords = generateSpawnPoint()
     whichPlatform = decideWhichPlatform()
-    new whichPlatform(coords[1], 800)
+    output = new whichPlatform(coords[1], 800)
   }
 
   if(!whichPlatform){
     //do not spawn an item
   } else if (whichPlatform === SmallPlatform) {
-    maybeSpawnNewItem(coords[1]-6) // center 32px item on 20px platform
+    maybeSpawnNewItem(coords[1]-6, output) // center 32px item on 20px platform
   } else {
-    maybeSpawnNewItem(coords[1]+9) // center 32px item on 50px platform
+    maybeSpawnNewItem(coords[1]+9, output) // center 32px item on 50px platform
   }
 }
 
@@ -164,7 +165,11 @@ class MobilePlatform {
       let platformStyle = window.getComputedStyle(platform)
 
       platform.style.left = `${Math.floor(Number(platformStyle.left.slice(0,-2))) + (that.direction*that.movementSpeed)}px`
-      if (Number(platform.style.left.slice(0,-2)) < 0 || Number(platform.style.left.slice(0,-2)) > 550) {
+      if (Number(platform.style.left.slice(0,-2)) < 0) {
+        platform.style.left = "0px"
+        that.direction = that.direction * (-1)
+      } else if (Number(platform.style.left.slice(0,-2)) > 550) {
+        platform.style.left = "550px"
         that.direction = that.direction * (-1)
       }
       if (Number(platformStyle.bottom.slice(0,-2)) < - 10) {
@@ -222,7 +227,11 @@ class MobileFragilePlatform {
       let platformStyle = window.getComputedStyle(platform)
 
       platform.style.left = `${Math.floor(Number(platformStyle.left.slice(0,-2))) + (that.direction*that.movementSpeed)}px`
-      if (Number(platform.style.left.slice(0,-2)) < 0 || Number(platform.style.left.slice(0,-2)) > 550) {
+      if (Number(platform.style.left.slice(0,-2)) < 0) {
+        platform.style.left = "0px"
+        that.direction = that.direction * (-1)
+      } else if (Number(platform.style.left.slice(0,-2)) > 550) {
+        platform.style.left = "550px"
         that.direction = that.direction * (-1)
       }
       if (Number(platformStyle.bottom.slice(0,-2)) < - 10) {

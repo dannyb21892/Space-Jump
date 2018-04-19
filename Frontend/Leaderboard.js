@@ -20,7 +20,6 @@ class Leaderboard {
             tr.innerHTML = `<td>${rank++}</td>
                             <td class="lb-player">${game.player.username}</td>
                             <td>${game.score}</td>`
-                            console.log("added new player")
             leaderboard.append(tr)
           } else if (userList[game.player.username] < game.score) {
             let tr = document.createElement("tr")

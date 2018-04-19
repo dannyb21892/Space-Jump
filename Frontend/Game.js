@@ -32,6 +32,10 @@ class Game {
 
   gameplay() {
     gameOver = false
+    let tutorial = document.getElementById("tutorial")
+    if(tutorial){
+      document.getElementById("letsgo").removeEventListener("click", window.game.gameplay)
+    }
     $("#tutorial").fadeOut(1000)
     setTimeout(() => {
       Tutorial.despawn()
