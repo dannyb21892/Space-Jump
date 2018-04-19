@@ -34,6 +34,14 @@
   overflow-y: scroll;
 }
 
+#lb-reset {
+  text-decoration: underline;
+  color: blue;
+}
+#lb-reset:hover {
+  cursor: pointer;
+}
+
 #tutorial {
   z-index: 3;
   height: 800px;
@@ -57,7 +65,8 @@
 #gameOver {
   color: white;
   position: absolute;
-  left: 21%;
+  width: 100%;
+  margin: 0 auto;
 }
 
 #retry:hover {
@@ -86,6 +95,14 @@ th {
     width: 200px
 }
 /* end table stuff */
+
+.lb-player {
+  text-decoration: underline;
+  color: blue;
+}
+.lb-player:hover {
+  cursor: pointer;
+}
 
 .basicPlatform {
   background-color: white;
@@ -124,6 +141,14 @@ th {
   position: absolute;
   width: 20px;
   left: 290px;
+}
+
+.bouncer {
+  transform: rotate(15deg);
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background-image: url("../images/if_bounce_45306.png")
 }
 
 .w3-sidebar-w3-bar-block{

@@ -4,6 +4,10 @@ let collisionCheckInterval
 
 
 class Jumper {
+  constructor(){
+    this.multiplier = 1;
+  }
+
   jump(){ //this function controls the constant jumping
     let jumper = document.getElementById("jumper")
     let that = this
@@ -17,26 +21,18 @@ class Jumper {
     for (let i=0; i<numberOfFramesPerJump; i++) {
       jumpVel[i] = Math.floor(initialJumpSpeed-(velocityDecreasePerFrame*i))
     }
-    // let frame = 0
-    // jumpInterval = setInterval(function(){
-    //   if (frame >= numberOfFramesPerJump) {
-    //     jumper.style.bottom = `${Number(jumper.style.bottom.slice(0,-2)) - initialJumpSpeed}px`
-    //     that.collisionCheck()
-    //   } else {
-    //     jumper.style.bottom = `${Number(jumper.style.bottom.slice(0,-2)) + jumpVel[frame]}px`
-    //     that.collisionCheck()
-    //     frame++
-    //   }
-    //   }, 1000/numberOfFramesPerJump)
+
     let frame = 0
 
     function myLoop() {
       setTimeout(function () {
-        jumper.style.bottom = `${Math.floor(Number(jumper.style.bottom.slice(0,-2))) + jumpVel[frame]}px`
+        jumper.style.bottom = `${(Math.floor(Number(jumper.style.bottom.slice(0,-2))) + jumperObject.multiplier*jumpVel[frame])}px`
+
         if (Math.floor(Number(jumper.style.bottom.slice(0,-2))) > 400) {
           window.game.screenScroll(Math.floor(Number(jumper.style.bottom.slice(0,-2))) - 400)
         }
         if((frame >= 30) && (frame < 60)){
+          jumperObject.multiplier = 1
           if (that.collisionCheck()) {
             that.jump()
             return true
@@ -109,7 +105,7 @@ class Jumper {
     let jumperBottom = Number(jumper.style.bottom.slice(0,-2))
     let jumperTop = Number(jumperBottom - jumper.style.height.slice(0,-2))
     let output = false
-    // collisionCheckInterval = setInterval(function(){
+
     activePlatforms.forEach(platform => { //platform in this case is an array [platformDiv, platformInstance]
       let platformStyle = window.getComputedStyle(platform[0])
       let platformLeft = Number(platformStyle.getPropertyValue('left').slice(0,-2))
@@ -120,9 +116,7 @@ class Jumper {
       let horizontalCollision = ((jumperLeft + jumperWidth) >= platformLeft) && (jumperLeft <= (platformLeft + platformWidth))
       let verticalCollision = (jumperBottom >= (platformBottom-10)) && (jumperBottom <= (platformBottom + platformHeight))
       if (horizontalCollision && verticalCollision) {
-        //clearInterval(jumpInterval)
         jumper.style.bottom = `${platformBottom + platformHeight}px`
-        //window.jumper.jump()
         if (platform[0].className === "fragilePlatform") {
           let i = activePlatforms.findIndex(element => element === platform)
           activePlatforms = [...activePlatforms.slice(0,i), 0, ...activePlatforms.slice(i+1)]
@@ -135,13 +129,34 @@ class Jumper {
         output = true
       }
     })
+    activePlatforms = activePlatforms.filter(element => element != 0)
+
+    activeItems.forEach(item => {
+
+      let itemStyle = window.getComputedStyle(item)
+      let itemLeft = Number(itemStyle.getPropertyValue('left').slice(0,-2))
+      let itemBottom = Number(itemStyle.getPropertyValue('bottom').slice(0,-2))
+      let itemWidth = Number(itemStyle.getPropertyValue('width').slice(0,-2))
+      let itemHeight = Number(itemStyle.getPropertyValue('height').slice(0,-2))
+
+      let horizontalCollision = ((jumperLeft + jumperWidth) >= itemLeft) && (jumperLeft <= (itemLeft + itemWidth))
+      let verticalCollision = (jumperBottom >= (itemBottom-10)) && (jumperBottom <= (itemBottom + itemHeight))
+
+      if (horizontalCollision && verticalCollision) {
+        jumper.style.bottom = `${itemBottom + itemHeight}px`
+        if (item.className === "bouncer") {
+          jumperObject.multiplier = 2
+          output = true
+        }
+      }
+    })
+
     if (jumperBottom < -15) {
      window.game.end()
      output = false
    } else if (jumperBottom > 0 && !output){
      output = false
    }
-   activePlatforms = activePlatforms.filter(element => element != 0)
    return output
   // }, 1000/60)
   }
