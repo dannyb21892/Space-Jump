@@ -18,8 +18,11 @@ class Game {
     let usernameInput = document.getElementById("usernameInput")
     if (usernameInput.value != "") {
       window.username = usernameInput.value
-      event.target.style = "visibility: hidden"
-      window.game.gameplay()
+      $("#newGameForm").fadeOut(1000)
+      setTimeout(() => {
+        $("#newGameForm").remove()
+        Tutorial.spawn()
+      }, 1000)
     } else {
       window.game.start()
     }
@@ -27,10 +30,15 @@ class Game {
 
   gameplay() {
     gameOver = false
+    $("#tutorial").fadeOut(1000)
+    setTimeout(() => {
+      Tutorial.despawn()
+    }, 1000)
     let jumper = new Jumper
-    // window.jumper = jumper
+    window.jumperObject = jumper
     document.addEventListener("keypress", jumper.moveJumper)
     initialSpawns()
+    document.getElementById("jumper").style.left = "290px"
     jumper.jump()
   }
 
@@ -82,6 +90,7 @@ class Game {
     gameOver = true
     let jumper = document.getElementById("jumper")
     if (jumper) {
+      document.removeEventListener("keypress", jumperObject.moveJumper)
       jumper.style.bottom = "0px"
       jumper.remove()
 
@@ -130,38 +139,41 @@ class Game {
   restart() {
     let playField = document.getElementById("play-field")
     window.game = new Game
-
-    playField.innerHTML = `
-    <div id="scoreDiv">
-      <h3 id="scoreTitle">SCORE:</h3>
-      <p id = "score">0</p>
-    </div>
-    <form id="newGameForm" method="post" style="visibility: hidden">
-      <label id="usernameInputLabel" style="color: white">Username:</label><br>
-      <input id="usernameInput" type="text"><br>
-      <input type="submit" value="START">
-    </form>
-    <div id="jumper" style="bottom: 0px; left: 290px;"></div>`
-
-    game.gameplay()
+    $("#gameOver").fadeOut(1000)
+    setTimeout(()=> {
+      playField.innerHTML = `
+      <div id="scoreDiv">
+        <h3 id="scoreTitle">SCORE:</h3>
+        <p id = "score">0</p>
+      </div>
+      <form id="newGameForm" method="post" style="visibility: hidden">
+        <label id="usernameInputLabel" style="color: white">Username:</label><br>
+        <input id="usernameInput" type="text"><br>
+        <input type="submit" value="START">
+      </form>
+      <div id="jumper" style="bottom: 0px; left: 290px;"></div>`
+      game.gameplay()
+    }, 1000)
   }
 
   restartNew() {
     let playField = document.getElementById("play-field")
     window.game = new Game
-
-    playField.innerHTML = `
-    <div id="scoreDiv">
-      <h3 id="scoreTitle">SCORE:</h3>
-      <p id = "score">0</p>
-    </div>
-    <form id="newGameForm" method="post" style="margin-top: 170px">
-      <label id="usernameInputLabel" style="color: white">Username:</label><br>
-      <input id="usernameInput" type="text"><br>
-      <input type="submit" value="START">
-    </form>
-    <div id="jumper" style="bottom: 0px; left: 290px;"></div>`
-
-    game.start()
+    $("#gameOver").fadeOut(1000)
+    setTimeout(()=> {
+      playField.innerHTML = `
+      <div id="scoreDiv">
+        <h3 id="scoreTitle">SCORE:</h3>
+        <p id = "score">0</p>
+      </div>
+      <form id="newGameForm" method="post" style="margin-top: 170px">
+        <label id="usernameInputLabel" style="color: white">Username:</label><br>
+        <input id="usernameInput" type="text"><br>
+        <input type="submit" value="START">
+      </form>
+      <div id="jumper" style="bottom: 0px; left: 290px;"></div>`
+      $("#playField").fadeIn(1000)
+      game.start()
+    }, 1000)
   }
 }

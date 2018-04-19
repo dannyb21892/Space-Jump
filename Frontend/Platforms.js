@@ -16,6 +16,10 @@ function initialSpawns() {
 
     new BasicPlatform(left, bottom)
    }
+   $(".basicPlatform").fadeOut(0)
+   $("#jumper").fadeOut(0)
+   $(".basicPlatform").fadeIn(1000)
+   $("#jumper").fadeIn(1000)
 }
 
 function generateSpawnPoint(){

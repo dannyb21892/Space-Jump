@@ -36,6 +36,20 @@
   overflow-y: scroll;
 }
 
+#tutorial {
+  z-index: 3;
+  height: 800px;
+  width: 600px;
+  top: 0%;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  color: white;
+  background-color: black;
+  font-family: Comic Sans MS;
+}
+
 #gameOver {
   color: white;
   position: absolute;
@@ -74,6 +88,7 @@ th {
   height: 5px;
   position: absolute;
   width: 50px;
+  left: 275px;
 }
 .fragilePlatform {
   background-color: red;
@@ -82,12 +97,14 @@ th {
   height: 5px;
   position: absolute;
   width: 50px;
+  left: 275px;
 }
 .mobilePlatform {
   background-color: purple;
   height: 5px;
   position: absolute;
   width: 50px;
+  left: 275px;
 }
 .mobileFragilePlatform {
   background-color: red;
@@ -102,6 +119,7 @@ th {
   height: 5px;
   position: absolute;
   width: 20px;
+  left: 290px;
 }
 
 .w3-sidebar-w3-bar-block{
