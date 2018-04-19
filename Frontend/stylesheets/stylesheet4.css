@@ -16,6 +16,8 @@
   height: 20px;
   position: absolute;
   width: 20px;
+  content: url(https://studio.code.org/v3/assets/6ExOiqS7Hwk0HSmIDWxz9Q/Jellyfish.png);
+  background: transparent;
 }
 
 #scoreDiv {

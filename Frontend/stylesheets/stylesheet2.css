@@ -2,7 +2,7 @@
   background-color: #000;
   z-index: 1;
   /* background: linear-gradient(pink, purple); */
-  background-image: url(https://images.pexels.com/photos/159020/sunset-sky-afterglow-evening-sky-159020.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  background-image: url(https://images.pexels.com/photos/634043/pexels-photo-634043.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
   height: 800px;
   width: 600px;
   margin: 0 auto;
@@ -14,9 +14,10 @@
 #jumper {
   background-color: white;
   height: 20px;
-  content: url(https://ih0.redbubble.net/image.366039979.8508/flat,800x800,075,f.jpg);
+  content: url(http://cdn.shopify.com/s/files/1/1061/1924/products/Poop_Emoji_7b204f05-eec6-4496-91b1-351acc03d2c7_grande.png?v=1480481059);
   position: absolute;
   width: 20px;
+  background: transparent;
 }
 
 #scoreDiv {
@@ -140,7 +141,7 @@ th {
  }
 
 input[type=text] {
-    border: 2px solid #e18570;
+    border: 2px solid grey;
     border-radius: 4px;
 }
 

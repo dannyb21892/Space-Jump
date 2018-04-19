@@ -15,6 +15,9 @@
   height: 20px;
   position: absolute;
   width: 20px;
+  content: url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Gold_Star.svg/2000px-Gold_Star.svg.png);
+  background: transparent;
+
 }
 
 #scoreDiv {
