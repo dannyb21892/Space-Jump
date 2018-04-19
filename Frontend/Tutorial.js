@@ -28,7 +28,6 @@ class Tutorial {
     $("#tutorial").fadeIn(1000)
     document.getElementById("letsgo").addEventListener("click", window.game.gameplay)
   }
-
   static despawn(){
     if (document.getElementById("tutorial")) {
       $("#tutorial").remove()

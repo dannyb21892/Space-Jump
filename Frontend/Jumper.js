@@ -1,8 +1,3 @@
-// let jumper = document.getElementById("jumper")
-let jumpInterval
-let collisionCheckInterval
-
-
 class Jumper {
   constructor(){
     this.multiplier = 1;
@@ -169,8 +164,5 @@ class Jumper {
      output = false
    }
    return output
-  // }, 1000/60)
   }
-
-
 }
