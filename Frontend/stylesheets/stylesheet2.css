@@ -37,6 +37,13 @@
   overflow-y: scroll;
 }
 
+#gameOver {
+  color: white;
+  position: absolute;
+  left: 21%;
+  font-family: Arial;
+}
+
 #retry:hover {
   text-shadow: 0 0 10px #6da5ff;
   cursor: pointer;
@@ -96,13 +103,6 @@ th {
   height: 5px;
   position: absolute;
   width: 20px;
-}
-
-.gameOver {
-  color: white;
-  position: absolute;
-  left: 220px;
-  font-family: Arial;
 }
 
 .w3-sidebar-w3-bar-block{
