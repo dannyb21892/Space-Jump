@@ -1,10 +1,11 @@
-let jumper = document.getElementById("jumper")
+// let jumper = document.getElementById("jumper")
 let jumpInterval
 let collisionCheckInterval
 
 
 class Jumper {
   jump(){ //this function controls the constant jumping
+    let jumper = document.getElementById("jumper")
     let that = this
     let jumpVel = []
 
@@ -44,11 +45,11 @@ class Jumper {
         frame++
         if (frame < 60) {
           myLoop()
-          //debugger
           return false
-        } else {
-          //debugger
+        } else if (!gameOver){
           return fallLoop()
+        } else {
+          return false
         }
       }, 1000/numberOfFramesPerJump)
     }
@@ -59,8 +60,10 @@ class Jumper {
         if (that.collisionCheck()) {
           that.jump()
           return true
-        } else {
+        } else  if (!gameOver){
           fallLoop()
+          return false
+        } else {
           return false
         }
       }, 1000/numberOfFramesPerJump)
@@ -71,6 +74,7 @@ class Jumper {
   }
 
   moveJumper(e) {
+    let jumper = document.getElementById("jumper")
     let lateralSpeed = 3 //how many pixels per frame you move laterally
     let numberOfMovementFramesPerKeyPress = 5 //kinda controls the "slideyness"
 
@@ -98,6 +102,7 @@ class Jumper {
   }
 
   collisionCheck(){
+    let jumper = document.getElementById("jumper")
     let jumperStyle = window.getComputedStyle(jumper)
     let jumperWidth = Number(jumperStyle.getPropertyValue('width').slice(0,-2))
     let jumperLeft = Number(jumper.style.left.slice(0,-2))

@@ -34,6 +34,23 @@
   overflow-y: scroll;
 }
 
+#gameOver {
+  color: white;
+  position: absolute;
+  left: 125px;
+}
+
+#retry:hover {
+  text-shadow: 0 0 10px #6da5ff;
+  cursor: pointer;
+}
+
+#retryNew:hover {
+  text-shadow: 0 0 10px #6da5ff;
+  cursor: pointer;
+}
+
+
 /* table stuff */
 table {
   width: 50%;
@@ -83,12 +100,6 @@ th {
   height: 5px;
   position: absolute;
   width: 20px;
-}
-
-.gameOver {
-  color: white;
-  position: absolute;
-  left: 220px;
 }
 
 .w3-sidebar-w3-bar-block{

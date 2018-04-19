@@ -63,7 +63,6 @@ function decideWhichPlatform(){
       whichPlatform = element.klass
     }
   })
-  console.log(whichPlatform)
   return whichPlatform
   // if (Math.random() < basicFrequency) {
   //   return BasicPlatform

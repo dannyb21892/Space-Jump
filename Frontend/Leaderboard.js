@@ -1,6 +1,5 @@
 class Leaderboard {
   static render(){
-    console.log("refreshing lb")
     let sorted = Leaderboard.sortEntries()
     let leaderboard = document.getElementById('lb-table')//ul')
     leaderboard.innerHTML = `<tr>
@@ -17,11 +16,9 @@ class Leaderboard {
         leaderboard.append(tr)
       })
     })
-    console.log("should be done?")
   }
 
   static sortEntries() {
-    console.log("fetching rankings")
     let entries = Adapter.getLeaderboardEntries()
     return entries.then(json => {
       return json.sort((a,b) => {

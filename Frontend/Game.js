@@ -1,9 +1,12 @@
+gameOver = false
+
 class Game {
   constructor() {
     this.score = 0
   }
 
   start() {
+    gameOver = false
     Leaderboard.render()
     let newGameForm = document.getElementById("newGameForm")
     newGameForm.style.visibility = ""
@@ -23,10 +26,10 @@ class Game {
   }
 
   gameplay() {
+    gameOver = false
     let jumper = new Jumper
-    window.jumper = jumper
-    let playField = document.getElementById("play-field")
-    playField.addEventListener("keypress", jumper.moveJumper)
+    // window.jumper = jumper
+    document.addEventListener("keypress", jumper.moveJumper)
     initialSpawns()
     jumper.jump()
   }
@@ -76,8 +79,10 @@ class Game {
   }
 
   end(){
+    gameOver = true
     let jumper = document.getElementById("jumper")
     if (jumper) {
+      jumper.style.bottom = "0px"
       jumper.remove()
 
       let tempActivePlatforms
@@ -86,16 +91,19 @@ class Game {
       if (document.getElementsByClassName("gameOver").length === 0){
         let gameOverDiv = document.createElement("div")
         gameOverDiv.innerHTML = `<h1>GAME<br>OVER</h1>
-        <br><br><h2>FINAL SCORE:<br>${window.game.score}</h2>`
+        <br><br><h2>FINAL SCORE:<br>${window.game.score}</h2><br>
+        <h1 id="retry">PLAY AGAIN AS ${window.username}?</h1>
+        <h1 id="retryNew">PLAY AS NEW PLAYER</h1>`
+
         gameOverDiv.style.top = "1200px"
 
-        gameOverDiv.className = "gameOver"
+        gameOverDiv.id = "gameOver"
 
         let playField = document.getElementById("play-field")
         playField.append(gameOverDiv)
 
         let interval = setInterval(function(){
-          // jumper.style.bottom = `${Number(jumper.style.bottom.slice(0,-2)) + 5}px`
+          // jumper.style.bottom = `${Number(jumper.style.bottom.slice(0,-2)) + 15}px`
           gameOverDiv.style.top = `${Number(gameOverDiv.style.top.slice(0,-2)) - 5}px`
           tempActivePlatforms = [...copyActivePlatforms]
           copyActivePlatforms.forEach(platform => {
@@ -112,6 +120,48 @@ class Game {
         },1000/60)
       }
       Adapter.sendGameResults(window.username, window.game.score, 10).then(Leaderboard.render)
+      let retry = document.getElementById("retry")
+      retry.addEventListener("click", game.restart)
+      let retryNew = document.getElementById("retryNew")
+      retryNew.addEventListener("click", game.restartNew)
     }
+  }
+
+  restart() {
+    let playField = document.getElementById("play-field")
+    window.game = new Game
+
+    playField.innerHTML = `
+    <div id="scoreDiv">
+      <h3 id="scoreTitle">SCORE:</h3>
+      <p id = "score">0</p>
+    </div>
+    <form id="newGameForm" method="post" style="visibility: hidden">
+      <label id="usernameInputLabel" style="color: white">Username:</label><br>
+      <input id="usernameInput" type="text"><br>
+      <input type="submit" value="START">
+    </form>
+    <div id="jumper" style="bottom: 0px; left: 290px;"></div>`
+
+    game.gameplay()
+  }
+
+  restartNew() {
+    let playField = document.getElementById("play-field")
+    window.game = new Game
+
+    playField.innerHTML = `
+    <div id="scoreDiv">
+      <h3 id="scoreTitle">SCORE:</h3>
+      <p id = "score">0</p>
+    </div>
+    <form id="newGameForm" method="post" style="margin-top: 170px">
+      <label id="usernameInputLabel" style="color: white">Username:</label><br>
+      <input id="usernameInput" type="text"><br>
+      <input type="submit" value="START">
+    </form>
+    <div id="jumper" style="bottom: 0px; left: 290px;"></div>`
+
+    game.start()
   }
 }

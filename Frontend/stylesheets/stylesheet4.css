@@ -36,6 +36,16 @@
   overflow-y: scroll;
 }
 
+#retry:hover {
+  text-shadow: 0 0 10px #6da5ff;
+  cursor: pointer;
+}
+
+#retryNew:hover {
+  text-shadow: 0 0 10px #6da5ff;
+  cursor: pointer;
+}
+
 /* table stuff */
 table {
   width: 50%;
