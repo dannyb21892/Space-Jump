@@ -95,7 +95,8 @@
 #gameOver {
   color: white;
   position: absolute;
-  left: 21%;
+  width: 100%;
+  margin: 0 auto;
 }
 
 #retry:hover {
@@ -177,6 +178,13 @@ th {
   width: 32px;
   height: 32px;
   background-image: url("../images/magic-wand.png");
+  left: 284px;
+}
+.rocket {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background-image: url("../images/rocket.png");
   left: 284px;
 }
 

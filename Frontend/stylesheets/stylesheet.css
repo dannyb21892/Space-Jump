@@ -187,6 +187,13 @@ th {
   background-image: url("../images/magic-wand.png");
   left: 284px;
 }
+.rocket {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background-image: url("../images/rocket.png");
+  left: 284px;
+}
 
 .w3-sidebar-w3-bar-block{
    height: 90%; /* Full-height: remove this if you want "auto" height */

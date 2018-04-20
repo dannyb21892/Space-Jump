@@ -86,7 +86,6 @@
   text-align: center;
   color: white;
   background-color: black;
-  font-family: Arial;
 }
 
 #letsgo:hover {
@@ -97,10 +96,10 @@
 #gameOver {
   color: white;
   position: absolute;
-  left: 21%;
+  width: 100%;
+  margin: 0 auto;
   font-family: Arial;
 }
-
 #retry:hover {
   text-shadow: 0 0 10px #6da5ff;
   cursor: pointer;
@@ -180,6 +179,13 @@ th {
   width: 32px;
   height: 32px;
   background-image: url("../images/magic-wand.png");
+  left: 284px;
+}
+.rocket {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background-image: url("../images/rocket.png");
   left: 284px;
 }
 

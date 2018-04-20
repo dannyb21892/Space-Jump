@@ -20,6 +20,8 @@ class Tutorial {
     <h5>Bouncers give you a double height jump when you land on them.</h5>
     <div class="wand"></div><p style="font-size: 10px; color: black;">.</p>
     <h5>Collect magic wands and press "SPACE" to magically spawn a basic platform beneath you.</h5>
+    <div class="rocket"></div><p style="font-size: 10px; color: black;">.</p>
+    <h5>Hop on a rocket to get a free ride for five seconds. You will automatically hop off.</h5>
     <h4>Climb as high as you can to score the most points! Can you take #1?</h4>
     <h1 id="letsgo">LET'S GO!</h1>`
 
